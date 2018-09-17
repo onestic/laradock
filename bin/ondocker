@@ -20,10 +20,9 @@ resolve_absolute_dir()
 
 init_dirs()
 {
-    resolve_absolute_dir
-    export COMMANDS_DIR="${ABSOLUTE_PATH}/console/commands"
-    export TASKS_DIR="${ABSOLUTE_PATH}/console/tasks"
-    export PROPERTIES_DIR="${ABSOLUTE_PATH}/console/properties"
+    export COMMANDS_DIR="${ABSOLUTE_BIN_PATH}/${ONDOCKER_COMMANDS_DIR}"
+    export TASKS_DIR="${ABSOLUTE_BIN_PATH}/${ONDOCKER_TASKS_DIR}"
+    export PROPERTIES_DIR="${ABSOLUTE_BIN_PATH}/${ONDOCKER_PROPERTIES_DIR}"
 }
 
 usage()
@@ -39,6 +38,8 @@ usage()
 	done
 }
 
+resolve_absolute_dir
+source ${ABSOLUTE_BIN_PATH}/config.sh
 init_dirs
 source ${TASKS_DIR}/load_properties.sh
 
