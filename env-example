@@ -6,9 +6,11 @@
 
 # Point to the path of your applications code on your host
 APP_CODE_PATH_HOST=./www
+APP_AUX_PATH_HOST=./www
 
 # Point to where the `APP_CODE_PATH_HOST` should be in the container. You may add flags to the path `:cached`, `:delegated`. When using Docker Sync add `:nocopy`
 APP_CODE_PATH_CONTAINER=/var/www:delegated
+APP_AUX_PATH_CONTAINER=/var/aux:delegated
 
 # Choose storage path on your machine. For all storage systems
 DATA_PATH_HOST=~/.laradock/data

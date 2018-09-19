@@ -80,6 +80,7 @@ services:
           - TZ=${WORKSPACE_TIMEZONE}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ${APP_AUX_PATH_HOST}:${APP_AUX_PATH_CONTAINER}
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       ports:
@@ -129,6 +130,7 @@ services:
       volumes:
         - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ${APP_AUX_PATH_HOST}:${APP_AUX_PATH_CONTAINER}
       expose:
         - "9000"
       extra_hosts:
@@ -154,6 +156,7 @@ services:
           - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ${APP_AUX_PATH_HOST}:${APP_AUX_PATH_CONTAINER}
         - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
         - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       ports:
@@ -177,6 +180,7 @@ services:
           - DOCUMENT_ROOT=${APACHE_DOCUMENT_ROOT}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ${APP_AUX_PATH_HOST}:${APP_AUX_PATH_CONTAINER}
         - ${APACHE_HOST_LOG_PATH}:/var/log/apache2
         - ${APACHE_SITES_PATH}:/etc/apache2/sites-available
       ports:
@@ -369,6 +373,7 @@ services:
       privileged: true
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ${APP_AUX_PATH_HOST}:${APP_AUX_PATH_CONTAINER}
       expose:
         - 2375
       networks:
