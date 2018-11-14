@@ -25,7 +25,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # always run apt update when start and after add new source list, then clean up at end.
 RUN apt-get update -yqq && \
-    apt-get install -y apt-utils && \
+    apt-get install -y apt-utils curl git && \
     pecl channel-update pecl.php.net
 
 #
@@ -530,6 +530,9 @@ COPY ./laravel.ini /usr/local/etc/php/conf.d
 COPY ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
 
 USER root
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer --version
 
 # Clean up
 RUN apt-get clean && \
