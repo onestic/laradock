@@ -1,0 +1,38 @@
+# App variables
+APP_ENV=local
+APP_DEBUG=true
+APP_KEY=
+APP_TIMEZONE=UTC
+
+# Logging variables
+LOG_CHANNEL=stack
+LOG_SLACK_WEBHOOK_URL=
+
+# Service Drivers for Cache & Queue
+CACHE_DRIVER=redis
+QUEUE_DRIVER=redis
+
+# Redis variables
+REDIS_HOST=redis
+
+# Cloud repository config
+BITBUCKET_API=https://api.bitbucket.org/2.0/
+BITBUCKET_USER=username
+BITBUCKET_PASSWORD=password
+BITBUCKET_TEAM=team
+
+# Private repository config
+SATIS_API=url
+
+# Project management config
+JIRA_API=url
+JIRA_USER=username
+JIRA_PASSWORD=password
+JIRA_TEMPLATE_PROJECT=template_project_id
+JIRA_TEMPLATE_PROJECT_DEVELOP=template_project_develop_id
+JIRA_TEMPLATE_PROJECT_SUPPORT=template_project_support_id
+JIRA_TEMPLATE_PROJECT_SMARTIE=template_project_smartie_id
+JIRA_DEFAULT_USERNAME=username_jira
+
+# Importation defaults config
+DEFAULT_PROJECTS=project1,project2,project3,projectN
