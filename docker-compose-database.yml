@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  app-prod:
+    image: eu.gcr.io/${project}/maat
+    container_name: app-prod
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=sqlproxy
+      - DB_PORT=${db_port}
+      - DB_DATABASE=${db_name}
+      - DB_USERNAME=${db_user}
+      - DB_PASSWORD=${db_password}
+    networks:
+      - project-network
+  sqlproxy:
+    image: gcr.io/cloudsql-docker/gce-proxy:1.11
+    container_name: app-postgres-conn
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${HOME}/gcloud/${json_file}:/secrets/cloudsql/credentials.json
+    command: ["/cloud_sql_proxy",
+              "-instances=${conn_string}=tcp:0.0.0.0:${db_port}",
+              "-credential_file=/secrets/cloudsql/credentials.json"]
+    tty: true
+    networks:
+      - project-network
+networks:
+  project-network:
+    driver: bridge
