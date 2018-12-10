@@ -19,9 +19,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ${HOME}/gcloud/${json_file}:/secrets/cloudsql/credentials.json
+      - ${HOME}/gcloud/${project}.json:/secrets/cloudsql/credentials.json
     command: ["/cloud_sql_proxy",
-              "-instances=${conn_string}=tcp:0.0.0.0:${db_port}",
+              "-instances=${project}:europe-west1:project-db-engine=tcp:0.0.0.0:${db_port}",
               "-credential_file=/secrets/cloudsql/credentials.json"]
     tty: true
     networks:
