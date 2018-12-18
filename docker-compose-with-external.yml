@@ -147,13 +147,25 @@ services:
       links:
         - docker-in-docker
 
-### Laravel Queue #########################################
-    laravel-queue-worker:
+### PHP Worker ############################################
+    php-worker:
       build:
-        context: ./php-fpm
-      volumes_from:
-        - php-fpm
-      command: php artisan queue:work --queue=maat --daemon
+        context: ./php-worker
+        args:
+          - PHP_VERSION=${PHP_VERSION}
+          - INSTALL_PGSQL=${PHP_WORKER_INSTALL_PGSQL}
+          - INSTALL_BCMATH=${PHP_WORKER_INSTALL_BCMATH}
+          - INSTALL_SOAP=${PHP_WORKER_INSTALL_SOAP}
+          - INSTALL_ZIP_ARCHIVE=${PHP_WORKER_INSTALL_ZIP_ARCHIVE}
+      volumes:
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ./php-worker/supervisord.d:/etc/supervisord.d
+      depends_on:
+        - workspace
+      extra_hosts:
+        - "dockerhost:${DOCKER_HOST_IP}"
+      networks:
+        - backend
 
 ### NGINX Server #########################################
     nginx:
