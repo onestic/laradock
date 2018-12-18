@@ -147,6 +147,14 @@ services:
       links:
         - docker-in-docker
 
+### Laravel Queue #########################################
+    laravel-queue-worker:
+      build:
+        context: ./php-fpm
+      volumes_from:
+        - php-fpm
+      command: php artisan queue:work --queue=maat --daemon
+
 ### NGINX Server #########################################
     nginx:
       build:
