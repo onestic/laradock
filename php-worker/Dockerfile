@@ -12,6 +12,7 @@ LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 RUN apk --update add wget \
   curl \
   git \
+  openssh-client \
   build-base \
   libmemcached-dev \
   libmcrypt-dev \
@@ -55,6 +56,11 @@ RUN if [ ${INSTALL_ZIP_ARCHIVE} = true ]; then \
 
 RUN rm /var/cache/apk/* \
     && mkdir -p /var/www
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer --version
+
+RUN  echo "    IdentityFile ~/.ssh/id_rsa" >> /etc/ssh/ssh_config
 
 #
 #--------------------------------------------------------------------------
